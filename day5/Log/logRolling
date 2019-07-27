@@ -1,0 +1,28 @@
+2019-07-27 10:28:42,184: INFO _rootCategory :LogForApp()
+2019-07-27 10:28:42,185: INFO _rootCategory :this is a info
+2019-07-27 10:28:42,185: WARN _rootCategory :system has a warning
+2019-07-27 10:28:42,185: FATAL _rootCategory :system has a fatal
+2019-07-27 10:28:42,185: ERROR _rootCategory :system has a error
+2019-07-27 10:28:42,185: INFO _rootCategory :destroy()
+2019-07-27 10:45:53,836: INFO _rootCategory :LogForApp()
+2019-07-27 10:45:53,836: INFO _rootCategory :this is a info fileName:logForCpp.cc functionName:main line:105
+2019-07-27 10:45:53,837: WARN _rootCategory :system has a warning fileName:logForCpp.cc functionName:main line:106
+2019-07-27 10:45:53,837: FATAL _rootCategory :system has a fatal fileName:logForCpp.cc functionName:main line:107
+2019-07-27 10:45:53,837: ERROR _rootCategory :system has a error fileName:logForCpp.cc functionName:main line:108
+2019-07-27 10:45:53,837: INFO _rootCategory :destroy()
+2019-07-27 10:45:53,837: INFO _rootCategory :~LogForApp()
+2019-07-27 10:49:18,616: INFO _rootCategory :LogForApp()
+2019-07-27 10:49:18,617: INFO _rootCategory :this is a info fileName:logForCpp.cc functionName:main line:105
+2019-07-27 10:49:18,617: WARN _rootCategory :system has a warning fileName:logForCpp.cc functionName:main line:106
+2019-07-27 10:49:18,617: FATAL _rootCategory :system has a fatal fileName:logForCpp.cc functionName:main line:107
+2019-07-27 10:49:18,618: ERROR _rootCategory :system has a error fileName:logForCpp.cc functionName:main line:108
+2019-07-27 10:49:18,618: INFO _rootCategory :destroy()
+2019-07-27 10:49:18,618: INFO _rootCategory :~LogForApp()
+2019-07-27 10:54:51,063: INFO _rootCategory :LogForApp()
+2019-07-27 10:54:51,064: INFO _rootCategory :this is func fileName:logForCpp.cc functionName:func line:103
+2019-07-27 10:54:51,065: INFO _rootCategory :this is a info fileName:logForCpp.cc functionName:main line:110
+2019-07-27 10:54:51,066: WARN _rootCategory :system has a warning fileName:logForCpp.cc functionName:main line:111
+2019-07-27 10:54:51,067: FATAL _rootCategory :system has a fatal fileName:logForCpp.cc functionName:main line:112
+2019-07-27 10:54:51,067: ERROR _rootCategory :system has a error fileName:logForCpp.cc functionName:main line:113
+2019-07-27 10:54:51,068: INFO _rootCategory :destroy()
+2019-07-27 10:54:51,068: INFO _rootCategory :~LogForApp()
