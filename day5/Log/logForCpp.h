@@ -1,3 +1,10 @@
+/**********************************************************
+ * Author        : Vigoroushui
+ * Email         : vigoroushui@gmail.com
+ * Last modified : 2019-07-29 09:45
+ * Filename      : logForCpp.h
+ * Description   : 使用单例模式封装logForCpp的头文件
+ * *******************************************************/
 #pragma once
 #include <iostream>
 #include <log4cpp/Category.hh>
@@ -39,9 +46,10 @@ private:
     static LogForApp* _plog;
     log4cpp::Category& _rootCategory;
 };
-LogForApp* LogForApp::_plog=NULL;
+//LogForApp* LogForApp::_plog=NULL；放在logForCpp.cc文件下合适，否则会重复定义
 static LogForApp* p=LogForApp::getInstance();
 std::string intToString(int line);
+//宏定义做字符串拼接
 #define msgPlus(msg) string(msg).append(" fileName:").append(__FILE__)\
                     .append(" functionName:").append(__func__).\
                     append(" line:").append(intToString(__LINE__)).c_str()

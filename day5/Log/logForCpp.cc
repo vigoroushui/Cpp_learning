@@ -1,5 +1,14 @@
+/**********************************************************
+ * Author        : Vigoroushui
+ * Email         : vigoroushui@gmail.com
+ * Last modified : 2019-07-29 10:29
+ * Filename      : logForCpp.cc
+ * Description   : logForCpp头文件中类的函数对象的实现
+                   以及对封装效果的测试
+ * *******************************************************/
 #include "logForCpp.h"
 using std::cout;
+LogForApp* LogForApp::_plog=NULL;
 
 LogForApp::LogForApp()
 :_rootCategory(log4cpp::Category::getRoot().getInstance("_rootCategory"))
