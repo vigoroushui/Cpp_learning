@@ -1,8 +1,8 @@
 /**********************************************************
  * Author        : Vigoroushui
  * Email         : vigoroushui@gmail.com
- * Last modified : 2019-07-30 21:41:59
- * Filename      : cow_string.cc
+ * Last modified : 2019-07-31 14:52
+ * Filename      : cow_string_up.cc
  * Description   : 
  * *******************************************************/
 #include <stdio.h>
@@ -13,31 +13,34 @@ using std::endl;
 
 class CowString
 {
-    class CharProxy;
+    class CharProxy
+    {
+    public:
+        CharProxy(CowString &self,size_t idx)
+        : _self(self)
+        , _idx(idx)
+        {}
+        //执行写操作
+        char & operator=(const char &ch);
+        //执行读操作
+        operator char()
+        {
+            return _self._pstr[_idx];
+        }
+    private:
+        CowString &_self;
+        size_t _idx;
+    };
 public:
-    //class CharProxy
-    //{
-    //public:
-    //    CharProxy(CowString &str,int index);
-    //    CharProxy &operator=(const CharProxy &rhs);//lvalue
-    //    CharProxy &operator=(char c);
-    //    operator char()const;//rvalue
-    //    char *operator&();
-    //    const char*operator&()const;
-    //private:
-    //    CowString &theString;
-    //    int charIndex;
-    //}
     CowString();
     CowString(const char *pstr);
     CowString(const CowString &rhs);
     CowString &operator=(const CowString &rhs);
     ~CowString();
-    CharProxy operator[](int index);
     const char *c_str() const {   return _pstr;}
     size_t size() const {   return strlen(_pstr);}
     int refcount() const {  return *(int*)(_pstr-4);}
-    char & operator[](size_t idx);
+    CharProxy operator[](size_t idx);
     const char operator[](size_t idx) const {   return _pstr[idx];}
     friend std::ostream &operator<<(std::ostream &os,const CowString &rhs);
 private:
@@ -56,41 +59,23 @@ private:
             cout<<"delete heap data"<<endl;
         }
     }
-    class CharProxy
-    {
-    public:  //这些函数一定要是公有
-        CharProxy(CowString& str,int index)
-        :_str(str),_index(index)
-        {
-            cout<<"CharProxy(CowString&,int)"<<endl;
-        }
-        char& operator=(char ch);         //嵌套类里面，也不能返回对象引用;因为嵌套类对象都是临时的
-        operator char()
-        { //类型转换函数，由Charproxy转向char
-            cout<<"operator char()"<<endl;
-            return _str._pstr[_index];
-        }
-    private:
-        CowString& _str;
-        int _index;
-    };
 private:
     char *_pstr;
 };
 CowString::CowString()
-    : _pstr(new char[4+1]()+4)
+: _pstr(new char[4+1]()+4)
 {
     initRefcount();
     cout<<"CowString()"<<endl;
 }
 CowString::CowString(const char *pstr)
-    : _pstr(new char[strlen(pstr)+5]()+4)
+: _pstr(new char[strlen(pstr)+5]()+4)
 {
     initRefcount();
     strcpy(_pstr,pstr);
 }
 CowString::CowString(const CowString &rhs)
-    : _pstr(rhs._pstr)
+: _pstr(rhs._pstr)
 {
     increaseRefcount();
 }
@@ -113,19 +98,25 @@ std::ostream &operator<<(std::ostream &os,const CowString &rhs)
     os<<rhs._pstr;
     return os;
 }
-char & CowString::operator[](size_t idx)
+CowString::CharProxy CowString::operator[](size_t idx)
 {
-    if(idx<size())
+    return CharProxy(*this,idx);
+}
+
+char & CowString::CharProxy::operator=(const char &ch)
+{
+    if(_idx<_self.size())
     {
-        if(refcount()>1)
+        if(_self.refcount()>1)
         {
-            decreaseRefcount();
-            char *ptmp=new char[size()+5]+4;
-            strcpy(ptmp,_pstr);
-            _pstr=ptmp;
-            initRefcount();
+            _self.decreaseRefcount();
+            char *ptmp=new char[_self.size()+5]()+4;
+            strcpy(ptmp,_self._pstr);
+            _self._pstr=ptmp;
+            _self.initRefcount();
         }
-        return _pstr[idx];
+        _self._pstr[_idx]=ch;
+        return _self._pstr[_idx];
     }else{
         static char nullchar='\0';
         return nullchar;
