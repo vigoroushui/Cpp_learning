@@ -13,7 +13,6 @@ public:
     : _num(num)
     , _healthPoint(healthPoint)
     {}
-
 private:
     int _num;
     int _healthPoint;
@@ -40,7 +39,7 @@ class Iceman
 {
 public:
 private:
-}
+};
 
 class Lion
 :public Warrior
@@ -48,14 +47,12 @@ class Lion
 public:
 private:
     int _loyalty;
-}
+};
 
 class Wolf
 :public Warrior
 {
 public:
 private:
-}
+};
 
-
-class 
